@@ -1,9 +1,8 @@
 import datetime
+import json
 import math
 
-import pandas as pd
 import requests
-import json
 
 API_BASE_URL = 'https://u50g7n0cbj.execute-api.us-east-1.amazonaws.com/v2/'
 RAW_DATA_PATH = '../../data/raw/'
@@ -21,11 +20,11 @@ def get_parameters(limit=100, sort='asc'):
     return response.json()
 
 
-# TODO: add list of parameters
-def get_average_measurements(limit=100000, page=1, sort='desc', country_id='ES',
+def get_average_measurements(limit=100000, page=1, country_id='ES',
                              spatial='country',
-                             temporal='day', date_from=datetime.date(2020, 1, 1), date_to=datetime.date(2020, 12, 31)):
-    query_params = {'limit': 1, 'sort': sort, 'page': page, 'country_id': country_id,
+                             temporal='day', date_from=datetime.date(2020, 1, 1), date_to=datetime.date(2020, 12, 31),
+                             ):
+    query_params = {'limit': 1, 'page': page, 'country_id': country_id,
                     'date_from': date_from,
                     'date_to': date_to, 'spatial': spatial, 'temporal': temporal}
 
@@ -33,7 +32,7 @@ def get_average_measurements(limit=100000, page=1, sort='desc', country_id='ES',
     pages = math.ceil(found / limit)
 
     for i in range(pages):
-        query_params = {'limit': limit, 'sort': sort, 'page': i + 1, 'country_id': country_id,
+        query_params = {'limit': limit, 'page': i + 1, 'country_id': country_id,
                         'date_from': date_from,
                         'date_to': date_to, 'spatial': spatial, 'temporal': temporal}
         response = requests.get(url=API_BASE_URL + 'averages', params=query_params, timeout=30)
@@ -47,6 +46,7 @@ def save_json(input_name, data, type='w'):
 
 
 if __name__ == '__main__':
+    # https://openaq.org/#/
     # Get and save countries
     countries = get_countries()
     save_json('countries.json', countries)
