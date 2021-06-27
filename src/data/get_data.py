@@ -54,4 +54,6 @@ if __name__ == '__main__':
     # Get and save parameters
     parameters = get_parameters()
     save_json('parameters.json', parameters)
+
+    # Get Average Measurements
     get_average_measurements()
