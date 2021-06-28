@@ -12,5 +12,9 @@ OpenAQ API, download the datasets from specific country or use a web client to d
 
 In order to get the data we create a script called get_data.py.
 ## Data cleaning
-
+As we can see on the jupyter notebooks called "Clean Air Quality" the data provided by OpenAQ API don't have errors, empty values, suspicious outliers or data types problems, the data provided has a well model and it is easy to understand. 
+In this part we decide to clean the following aspects:
+- Parameters: We will know how is structured the parameter's data and reduce the data.
+- Countries: We will know the countries that are available and the model.
+- Measurements:
 ## Data Processing
