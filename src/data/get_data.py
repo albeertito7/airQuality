@@ -1,13 +1,11 @@
 #!/usr/bin/env python
 
+import argparse
 import datetime
 import json
-import math
-import argparse
 import os
 from shutil import rmtree
 
-import pandas as pd
 import requests
 
 # global vars
