@@ -46,10 +46,8 @@ def get_parameters(limit=100, sort='asc'):
     else:
         return response.json()
 
-def get_average_measurements(limit=100000, page=1, country_id='ES',
-                             spatial='country',
-                             temporal='day', date_from=datetime.date(2020, 1, 1), date_to=datetime.date(2020, 12, 31),
-                             ):
+def get_average_measurements(limit=100000, page=1, country_id='ES', spatial='country', temporal='day', 
+                             date_from=datetime.date(2020, 1, 1), date_to=datetime.date(2020, 12, 31)):
     try:
         payload = {
             'limit': 1,
