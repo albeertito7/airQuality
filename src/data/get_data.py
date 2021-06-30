@@ -97,6 +97,8 @@ def main():
 
     args = parse_arguments()
 
+    os.chdir(os.path.dirname(os.path.realpath(__file__)))
+    
     RAW_DATA_PATH = args.path
     VERBOSE = args.verbose
 
