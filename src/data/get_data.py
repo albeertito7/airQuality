@@ -68,7 +68,8 @@ def get_locations(limit=1000, page=1, country_id='ES', city='Lleida'):
 
 
 def get_measurements(limit=100000, page=1, country_id='ES', city='Lleida',
-                     date_from=datetime.date(2020, 1, 1), date_to=datetime.date(2020, 12, 31)):
+                     location=None,
+                     date_from=datetime.date(2019, 1, 1), date_to=datetime.date(2020, 12, 31)):
     try:
         payload = {
             'limit': limit,
@@ -76,12 +77,13 @@ def get_measurements(limit=100000, page=1, country_id='ES', city='Lleida',
             'country_id': country_id,
             'date_from': date_from,
             'date_to': date_to,
-            'city': city
+            'city': city,
+            'location': location
         }
 
-        response = requests.get(url=API_BASE_URL + 'averages', params=payload, timeout=30)
+        response = requests.get(url=API_BASE_URL + 'measurements', params=payload, timeout=30)
         response.raise_for_status()
-        save_json('measurements_%s.json' % country_id, response.json())
+        save_json('measurements_%s_%s.json' % (country_id, location), response.json())
 
     except requests.exceptions.RequestException as e:
         raise SystemExit(e)
@@ -139,7 +141,10 @@ def main():
     get_locations()
 
     # Get average measurements
-    #get_measurements()
+    locations = ['ES1348A', 'ES1225A', 'ES1588A', 'ES1982A', 'ES2034A', 'ES0014R', 'ES1248A']
+    for i in locations:
+        print(i)
+        get_measurements(location=i)
 
     print("Average measurements got.") if VERBOSE else 'Python inline if...'
     print("Completed.") if VERBOSE else 'Python inline if...'
