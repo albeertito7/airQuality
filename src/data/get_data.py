@@ -50,8 +50,21 @@ def get_parameters(limit=100, sort='asc'):
         return response.json()
 
 
-def get_locations():
-    pass
+def get_locations(limit=1000, page=1, country_id='ES', city='Lleida'):
+    try:
+        payload = {
+            'limit': limit,
+            'page': page,
+            'country_id': country_id,
+            'city': city
+        }
+
+        response = requests.get(url=API_BASE_URL + 'locations', params=payload, timeout=30)
+        response.raise_for_status()
+        save_json('locations_%s_%s.json' % (country_id, city), response.json())
+
+    except requests.exceptions.RequestException as e:
+        raise SystemExit(e)
 
 
 def get_measurements(limit=100000, page=1, country_id='ES', city='Lleida',
@@ -122,8 +135,11 @@ def main():
 
     print("Sensor parameters got.") if VERBOSE else 'Python inline if...'
 
+    # Get and save locations
+    get_locations()
+
     # Get average measurements
-    get_measurements()
+    #get_measurements()
 
     print("Average measurements got.") if VERBOSE else 'Python inline if...'
     print("Completed.") if VERBOSE else 'Python inline if...'
