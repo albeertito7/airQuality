@@ -140,7 +140,7 @@ def main():
     # Get and save locations
     get_locations()
 
-    # Get average measurements
+    # Get measurements
     locations = ['ES1348A', 'ES1225A', 'ES1588A', 'ES1982A', 'ES2034A', 'ES0014R', 'ES1248A']
     for i in locations:
         print(i)
