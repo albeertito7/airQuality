@@ -3,7 +3,8 @@
 import datetime
 import json
 import math
-import argparse, os
+import argparse
+import os
 from shutil import rmtree
 
 import requests
@@ -96,14 +97,13 @@ def main():
     global RAW_DATA_PATH, VERBOSE
 
     args = parse_arguments()
-
-    os.chdir(os.path.dirname(os.path.realpath(__file__)))
     
     RAW_DATA_PATH = args.path
     VERBOSE = args.verbose
 
     print("Starting...") if VERBOSE else 'Python inline if...'
 
+    os.chdir(os.path.dirname(os.path.realpath(__file__)))
     checkPath()
 
     print("Path checked.") if VERBOSE else 'Python inline if...'
