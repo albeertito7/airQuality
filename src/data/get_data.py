@@ -121,14 +121,13 @@ def main():
 
     RAW_DATA_PATH = args.path
     if args.verbose:
-        """
-        file_handler = log.FileHandler('getData_%s.log' % datetime.datetime.now().strftime("%y-%m-%d-%H-%M-%S"))
+        file_handler = log.FileHandler('getData_%s.log' % datetime.datetime.now().strftime("%H-%M-%S"))
         file_handler.setLevel(log.DEBUG)
 
-        formatter = coloredlogs.ColoredFormatter("%(asctime)s %(levelname)s %(message)s")
+        formatter = log.Formatter("%(asctime)s %(levelname)s %(message)s")
         file_handler.setFormatter(formatter)
         log.getLogger().addHandler(file_handler)
-        """
+        
         coloredlogs.install(fmt="%(asctime)s %(levelname)s %(message)s", level=log.DEBUG)
 
     log.info("Starting...")
