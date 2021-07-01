@@ -109,7 +109,7 @@ def parse_arguments():
     parser.add_argument('-p', '--path', dest='path', type=str, default=RAW_DATA_PATH, required=False,
                         help='Custom save data path directory.')
     parser.add_argument('-v', '--verbose', dest='verbose', action='store_true', default=False, required=False,
-                        help='Display monitoring details.')
+                        help='Display monitoring details and create a logging file.')
     return parser.parse_intermixed_args()
 
 
