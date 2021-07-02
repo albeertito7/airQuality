@@ -109,7 +109,7 @@ def checkPath():
 
 def parse_arguments():
     parser = argparse.ArgumentParser(prog="Get data script",
-                                     description="Script to get the data about air quality using OpenAQ.")
+                                     description="Script to get the data about air quality of Lleida using the OpenAQ API service which collects data from air sensors located around the world.")
     parser.add_argument('-p', '--path', dest='path', type=str, default=RAW_DATA_PATH, required=False,
                         help='Custom save data path directory.')
     parser.add_argument('-v', '--verbose', dest='verbose', action='store_true', default=False, required=False,
