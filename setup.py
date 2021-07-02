@@ -5,6 +5,6 @@ setup(
     packages=find_packages(),
     version='0.1.0',
     description='AirQuality Analysis',
-    author='francesc contreras',
+    author='Francesc Contreras & Albert Pérez',
     license='MIT',
 )
