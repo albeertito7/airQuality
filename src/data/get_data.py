@@ -32,7 +32,7 @@ def get_countries(limit=200, order_by='country', sort='asc'):
         return response.json()
 
 
-def get_parameters(limit=100, sort='asc'):
+def get_parameters(limit=100000, sort='asc'):
     try:
         payload = {
             'limit': limit,
