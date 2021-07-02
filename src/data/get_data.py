@@ -63,6 +63,10 @@ def get_locations(limit=1000, page=1, country_id='ES', city='Lleida'):
         response.raise_for_status()
         save_json('locations_%s_%s.json' % (country_id, city), response.json())
 
+        lst = []
+        for location in response.json()['results']: lst.append(location['name'])
+        return lst
+
     except requests.exceptions.RequestException as e:
         log.error(e)
         raise SystemExit(e)
@@ -147,10 +151,10 @@ def main():
 
     # Get and save locations
     log.info("Getting locations...")
-    get_locations()
+    locations = get_locations()
 
     # Get measurements
-    locations = ['ES1348A', 'ES1225A', 'ES1588A', 'ES1982A', 'ES2034A', 'ES0014R', 'ES1248A'] # sensors (location_id)
+    #locations = ['ES1348A', 'ES1225A', 'ES1588A', 'ES1982A', 'ES2034A', 'ES0014R', 'ES1248A'] # sensors (name)
     for i in locations:
         log.info("Getting [%s] measuraments..." % i)
         get_measurements(location=i)
