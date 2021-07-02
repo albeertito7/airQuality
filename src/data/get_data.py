@@ -65,6 +65,8 @@ def get_locations(limit=1000, page=1, country_id='ES', city='Lleida'):
 
         lst = []
         for location in response.json()['results']: lst.append(location['name'])
+
+        log.info("Locations found: %s" % lst)
         return lst
 
     except requests.exceptions.RequestException as e:
@@ -125,14 +127,15 @@ def main():
 
     RAW_DATA_PATH = args.path
     if args.verbose:
-        file_handler = log.FileHandler('getData_%s.log' % datetime.datetime.now().strftime("%d-%H-%M-%S")) # day - hour - minute - second
+        os.makedirs(os.path.dirname(os.path.realpath(__file__)) + "/logs", exist_ok=True)
+        file_handler = log.FileHandler('logs\getData_%s.log' % datetime.datetime.now().strftime("%Y-%m-%d")) # year - month - day
         file_handler.setLevel(log.DEBUG)
 
         formatter = log.Formatter("%(asctime)s %(levelname)s %(message)s")
         file_handler.setFormatter(formatter)
         log.getLogger().addHandler(file_handler)
         
-        coloredlogs.install(fmt="%(asctime)s %(levelname)s %(message)s", level=log.DEBUG)
+        coloredlogs.install(fmt="%(asctime)s %(levelname)s %(message)s", mode='a', level=log.DEBUG) # mode 'append'
 
     log.info("Starting...")
 
@@ -159,7 +162,7 @@ def main():
         log.info("Getting [%s] measuraments..." % i)
         get_measurements(location=i)
 
-    log.info("Completed.")
+    log.info("Completed.\n%s" % ("-"*100 + "\n"))
 
 if __name__ == '__main__':
     main()
