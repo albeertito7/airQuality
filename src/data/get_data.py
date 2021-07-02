@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import sys, os
+import os
 from shutil import rmtree
 
 import requests
@@ -121,7 +121,7 @@ def main():
 
     RAW_DATA_PATH = args.path
     if args.verbose:
-        file_handler = log.FileHandler('getData_%s.log' % datetime.datetime.now().strftime("%H-%M-%S"))
+        file_handler = log.FileHandler('getData_%s.log' % datetime.datetime.now().strftime("%d-%H-%M-%S")) # day - hour - minute - second
         file_handler.setLevel(log.DEBUG)
 
         formatter = log.Formatter("%(asctime)s %(levelname)s %(message)s")
@@ -150,7 +150,7 @@ def main():
     get_locations()
 
     # Get measurements
-    locations = ['ES1348A', 'ES1225A', 'ES1588A', 'ES1982A', 'ES2034A', 'ES0014R', 'ES1248A']
+    locations = ['ES1348A', 'ES1225A', 'ES1588A', 'ES1982A', 'ES2034A', 'ES0014R', 'ES1248A'] # sensors (location_id)
     for i in locations:
         log.info("Getting [%s] measuraments..." % i)
         get_measurements(location=i)
