@@ -18,6 +18,3 @@ In this part we decide to clean the following aspects:
 - Countries: We will know the countries that are available and the model.
 - Measurements:
 - Locations:
-## Data Processing
-
-# EXPLAIN AVG DAY
